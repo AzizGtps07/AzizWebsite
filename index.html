@@ -6,7 +6,15 @@
     <title>Untuk Sahabat Gamersku</title>
     <style>
         body {
-            background-color: #111111;
+            /* MENGGUNAKAN FOTO DENGAN EFEK GELAP (OVERLAY) */
+            /* Pastikan nama file di bawah ini sama persis dengan yang kamu upload di GitHub */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('foto kenangan.png');
+            
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            
             color: #ffffff;
             font-family: 'Segoe UI', Arial, sans-serif;
             display: flex;
@@ -15,47 +23,58 @@
             min-height: 100vh;
             margin: 0;
         }
+
         .container {
             text-align: center;
             padding: 40px;
             border: 3px solid #FFD700;
             border-radius: 20px;
-            background: rgba(255, 255, 255, 0.05);
+            /* Kotak hitam transparan agar tulisan jelas */
+            background: rgba(0, 0, 0, 0.6); 
             max-width: 500px;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 0 30px rgba(215, 175, 0, 0.3);
+            position: relative;
+            z-index: 1;
         }
+
         h1 {
             color: #FFD700;
             font-size: 2.5rem;
             margin-bottom: 10px;
             text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
+
         .highlight {
             color: #FFD700;
             font-weight: bold;
         }
+
         .btn-game {
             display: inline-block;
             margin-top: 20px;
             background-color: #FFD700;
             color: #111;
-            padding: 10px 20px;
+            padding: 12px 24px;
             text-decoration: none;
             font-weight: bold;
-            border-radius: 5px;
+            border-radius: 8px;
+            border: 2px solid #b39700;
+            transition: all 0.3s ease;
         }
+
         .btn-game:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px #FFD700;
-    transition: 0.3s;
-}
+            transform: scale(1.1);
+            box-shadow: 0 0 20px #FFD700;
+            background-color: #ffffff;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Hay Teman Online Ku !!</h1>
         <p>Dari Dunia <span class="highlight">Roblox</span> ke Persahabatan Nyata.</p>
-        <p>Makasih ya sudah mau kenalan dengan aku.Tombol di bawah ini merupakan kenangan yang tidak bisa ku lupain</p>
+        <p>Makasih ya sudah mau kenalan dengan aku. Tombol di bawah ini merupakan kenangan yang tidak bisa ku lupain</p>
         <a href="#" class="btn-game">Terimakasih Kenangan nya</a>
     </div>
 </body>
