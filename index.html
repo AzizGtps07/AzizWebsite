@@ -6,7 +6,6 @@
     <title>Untuk Sahabat Gamersku</title>
     <style>
         body {
-            /* Pastikan nama file foto kenangan.png sudah benar di GitHub */
             background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('foto kenangan.png');
             background-size: cover;
             background-position: center;
@@ -19,7 +18,7 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            overflow: hidden; /* Mencegah scrollbar */
+            overflow: hidden;
         }
 
         .container {
@@ -31,7 +30,7 @@
             max-width: 500px;
             box-shadow: 0 0 30px rgba(215, 175, 0, 0.3);
             position: relative;
-            z-index: 2; /* Di depan efek salju */
+            z-index: 2;
         }
 
         h1 {
@@ -40,34 +39,18 @@
             margin-bottom: 10px;
             text-transform: uppercase;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            /* Efek Mengetik */
             white-space: nowrap;
             overflow: hidden;
-            width: 0; /* Mulai dari 0 */
+            width: 0;
             animation: typing 2.5s steps(30, end) forwards;
         }
 
-        /* Animasi Mengetik h1 */
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
+        @keyframes typing { from { width: 0; } to { width: 100%; } }
 
-        .p-fade {
-            opacity: 0;
-            animation: fadeIn 2s 3s forwards; /* Fade in setelah h1 selesai */
-        }
+        .p-fade { opacity: 0; animation: fadeIn 2s 3s forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Animasi Fade In P */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .highlight {
-            color: #FFD700;
-            font-weight: bold;
-        }
+        .highlight { color: #FFD700; font-weight: bold; }
 
         .btn-game {
             display: inline-block;
@@ -82,44 +65,30 @@
             transition: all 0.3s ease;
             cursor: pointer;
             opacity: 0;
-            animation: fadeIn 2s 5s forwards; /* Fade in setelah P selesai */
+            animation: fadeIn 2s 5s forwards;
         }
 
-        .btn-game:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px #FFD700;
-            background-color: #ffffff;
-        }
+        .btn-game:hover { transform: scale(1.1); box-shadow: 0 0 20px #FFD700; background-color: #ffffff; }
 
-        /* Tombol Musik */
+        /* Tombol Musik Lebih Mencolok */
         #musicBtn {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 30px;
+            right: 30px;
             background: #FFD700;
             color: #111;
-            border: none;
+            border: 2px solid #fff;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 20px;
-            font-weight: bold;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
             cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-            z-index: 10;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            z-index: 100;
+            transition: 0.3s;
         }
 
-        /* CSS untuk Efek Salju (Melayang) */
-        #snow-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1; /* Di belakang container */
-            pointer-events: none; /* Klik tidak terhalang */
-        }
-
+        #snow-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
     </style>
 </head>
 <body>
@@ -135,48 +104,40 @@
         <a href="#" class="btn-game">Terimakasih Kenangan nya</a>
     </div>
 
-    <button id="musicBtn">♫</button>
+    <button id="musicBtn">🔇</button>
 
-    <audio id="bgMusic" loop>
-        <source src="https://www.bensound.com/bensound-music/bensound-tenderness.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
     </audio>
 
     <script>
-        // 1. Logika Musik (Autoplay di Laptop, Tombol di HP)
         const music = document.getElementById("bgMusic");
         const musicBtn = document.getElementById("musicBtn");
         let isPlaying = false;
 
-        // Mencoba autoplay saat halaman terbuka (biasanya hanya jalan di laptop)
-        window.addEventListener("load", () => {
-            music.play().then(() => {
-                isPlaying = true;
-                musicBtn.textContent = "♫ ON";
-            }).catch(() => {
-                isPlaying = false;
-                musicBtn.textContent = "♫ OFF";
-            });
-        });
-
-        // Tombol musik manual
-        musicBtn.addEventListener("click", () => {
+        // Fungsi nyalakan/matikan musik
+        function toggleMusic() {
             if (isPlaying) {
                 music.pause();
-                musicBtn.textContent = "♫ OFF";
+                musicBtn.textContent = "🔇";
+                musicBtn.style.backgroundColor = "#FFD700";
             } else {
-                music.play();
-                musicBtn.textContent = "♫ ON";
+                // Paksa play dengan volume maksimal
+                music.volume = 1.0;
+                music.play().then(() => {
+                    musicBtn.textContent = "🔊";
+                    musicBtn.style.backgroundColor = "#fff";
+                }).catch(e => console.log("Gagal putar: ", e));
             }
             isPlaying = !isPlaying;
-        });
+        }
 
+        musicBtn.addEventListener("click", toggleMusic);
 
-        // 2. Logika Efek Salju (Partikel)
+        // Efek Salju
         const canvas = document.getElementById("snow-canvas");
         const ctx = canvas.getContext("2d");
         let particles = [];
-
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
@@ -184,50 +145,34 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 5 + 1; // Ukuran partikel
-                this.speed = Math.random() * 2 + 1; // Kecepatan jatuh
-                this.opacity = Math.random() * 0.5 + 0.1; // Kegelapan partikel
+                this.size = Math.random() * 3 + 1;
+                this.speed = Math.random() * 1 + 0.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
             }
             update() {
                 this.y += this.speed;
-                if (this.y > canvas.height) {
-                    this.y = -10;
-                    this.x = Math.random() * canvas.width;
-                }
+                if (this.y > canvas.height) { this.y = -10; this.x = Math.random() * canvas.width; }
             }
             draw() {
                 ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
             }
         }
 
-        function createParticles() {
-            for (let i = 0; i < 100; i++) { // Jumlah partikel
-                particles.push(new Particle());
-            }
-        }
-
+        function createParticles() { for (let i = 0; i < 70; i++) { particles.push(new Particle()); } }
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
+            particles.forEach(p => { p.update(); p.draw(); });
             requestAnimationFrame(animateParticles);
         }
 
         window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            particles = [];
-            createParticles();
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            particles = []; createParticles();
         });
 
         createParticles();
         animateParticles();
-
     </script>
 </body>
 </html>
