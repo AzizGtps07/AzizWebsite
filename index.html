@@ -70,22 +70,41 @@
 
         .btn-game:hover { transform: scale(1.1); box-shadow: 0 0 20px #FFD700; background-color: #ffffff; }
 
-        /* Tombol Musik Lebih Mencolok */
-        #musicBtn {
+        /* KONTROL MUSIK BARU */
+        .music-container {
             position: fixed;
             bottom: 30px;
             right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 15px;
+            border-radius: 50px;
+            border: 2px solid #FFD700;
+            z-index: 100;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        #musicBtn {
             background: #FFD700;
             color: #111;
-            border: 2px solid #fff;
+            border: none;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 24px;
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
             cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-            z-index: 100;
             transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #volumeSlider {
+            width: 80px;
+            cursor: pointer;
+            accent-color: #FFD700; /* Warna slider kuning emas */
         }
 
         #snow-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
@@ -104,7 +123,10 @@
         <a href="#" class="btn-game">Terimakasih Kenangan nya</a>
     </div>
 
-    <button id="musicBtn">🔇</button>
+    <div class="music-container">
+        <button id="musicBtn">🔇</button>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1">
+    </div>
 
     <audio id="bgMusic" loop preload="auto">
         <source src="lagu.mp3" type="audio/mp3">
@@ -113,6 +135,7 @@
     <script>
         const music = document.getElementById("bgMusic");
         const musicBtn = document.getElementById("musicBtn");
+        const volumeSlider = document.getElementById("volumeSlider");
         let isPlaying = false;
 
         // Fungsi nyalakan/matikan musik
@@ -122,8 +145,6 @@
                 musicBtn.textContent = "🔇";
                 musicBtn.style.backgroundColor = "#FFD700";
             } else {
-                // Paksa play dengan volume maksimal
-                music.volume = 1.0;
                 music.play().then(() => {
                     musicBtn.textContent = "🔊";
                     musicBtn.style.backgroundColor = "#fff";
@@ -133,6 +154,17 @@
         }
 
         musicBtn.addEventListener("click", toggleMusic);
+
+        // Fungsi kontrol volume
+        volumeSlider.addEventListener("input", (e) => {
+            music.volume = e.target.value;
+            // Update ikon jika volume di-nol-kan
+            if (music.volume == 0) {
+                musicBtn.textContent = "🔇";
+            } else if (isPlaying) {
+                musicBtn.textContent = "🔊";
+            }
+        });
 
         // Efek Salju
         const canvas = document.getElementById("snow-canvas");
