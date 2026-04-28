@@ -21,37 +21,81 @@
             overflow: hidden;
         }
 
-        .container {
+        /* Navigasi Halaman */
+        .page {
+            display: none; /* Sembunyikan semua halaman dulu */
             text-align: center;
+            width: 100%;
+            max-width: 900px;
+            padding: 20px;
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+        .active {
+            display: block; /* Hanya tampilkan halaman yang aktif */
+        }
+
+        /* Halaman 1 */
+        .container-h1 {
+            background: rgba(0, 0, 0, 0.6);
             padding: 40px;
             border: 3px solid #FFD700;
             border-radius: 20px;
-            background: rgba(0, 0, 0, 0.6); 
-            max-width: 500px;
             box-shadow: 0 0 30px rgba(215, 175, 0, 0.3);
-            position: relative;
-            z-index: 2;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         h1 {
             color: #FFD700;
             font-size: 2.5rem;
-            margin-bottom: 10px;
             text-transform: uppercase;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            white-space: nowrap;
-            overflow: hidden;
-            width: 0;
-            animation: typing 2.5s steps(30, end) forwards;
         }
 
-        @keyframes typing { from { width: 0; } to { width: 100%; } }
+        /* Halaman 2 (Layout Baru) */
+        .second-page-content {
+            display: flex;
+            flex-direction: row; /* Foto kiri, Teks kanan */
+            align-items: flex-start;
+            gap: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid #FFD700;
+        }
 
-        .p-fade { opacity: 0; animation: fadeIn 2s 3s forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .photo-side {
+            flex: 1;
+        }
 
-        .highlight { color: #FFD700; font-weight: bold; }
+        .photo-side img {
+            width: 100%;
+            border-radius: 15px;
+            border: 2px solid #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
 
+        .text-side {
+            flex: 1;
+            text-align: left;
+            max-height: 400px;
+            overflow-y: auto; /* Biar bisa scroll kalau kata-katanya panjang */
+            padding-right: 10px;
+        }
+
+        .text-side h2 {
+            color: #FFD700;
+            margin-top: 0;
+        }
+
+        .text-side p {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        /* Tombol */
         .btn-game {
             display: inline-block;
             margin-top: 20px;
@@ -61,16 +105,14 @@
             text-decoration: none;
             font-weight: bold;
             border-radius: 8px;
-            border: 2px solid #b39700;
-            transition: all 0.3s ease;
             cursor: pointer;
-            opacity: 0;
-            animation: fadeIn 2s 5s forwards;
+            transition: 0.3s;
+            border: none;
         }
 
-        .btn-game:hover { transform: scale(1.1); box-shadow: 0 0 20px #FFD700; background-color: #ffffff; }
+        .btn-game:hover { transform: scale(1.1); box-shadow: 0 0 20px #FFD700; background-color: #fff; }
 
-        /* KONTROL MUSIK BARU */
+        /* Kontrol Musik */
         .music-container {
             position: fixed;
             bottom: 30px;
@@ -83,28 +125,16 @@
             border-radius: 50px;
             border: 2px solid #FFD700;
             z-index: 100;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
 
-        #musicBtn {
-            background: #FFD700;
-            color: #111;
-            border: none;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            font-size: 20px;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        #musicBtn { background: #FFD700; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; }
+        #volumeSlider { width: 70px; accent-color: #FFD700; }
 
-        #volumeSlider {
-            width: 80px;
-            cursor: pointer;
-            accent-color: #FFD700; /* Warna slider kuning emas */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            .second-page-content { flex-direction: column; max-height: 80vh; overflow-y: auto; }
         }
 
         #snow-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
@@ -114,13 +144,31 @@
 
     <canvas id="snow-canvas"></canvas>
 
-    <div class="container">
-        <h1>Hay Teman Online Ku !!</h1>
-        <div class="p-fade">
-            <p>Dari Dunia <span class="highlight">Roblox</span> ke Persahabatan Nyata.</p>
-            <p>Makasih ya sudah mau kenalan dengan aku. Tombol di bawah ini merupakan kenangan yang tidak bisa ku lupain</p>
+    <div id="page1" class="page active">
+        <div class="container-h1">
+            <h1>Hay Teman Online Ku !!</h1>
+            <p>Dari Dunia <span style="color:#FFD700; font-weight:bold;">Roblox</span> ke Persahabatan Nyata.</p>
+            <p>Makasih ya sudah mau kenalan dengan aku.</p>
+            <button class="btn-game" onclick="showPage(2)">Terimakasih Kenangan nya</button>
         </div>
-        <a href="#" class="btn-game">Terimakasih Kenangan nya</a>
+    </div>
+
+    <div id="page2" class="page">
+        <div class="second-page-content">
+            <div class="photo-side">
+                <img src="foto kenangan.png" alt="Kenangan Kita">
+            </div>
+            
+            <div class="text-side">
+                <h2>Our Story</h2>
+                <p>Mungkin awalnya kita cuma karakter kotak-kotak di Roblox, tapi obrolan kita beneran nyata.</p>
+                <p>Setiap base yang kita bangun, setiap boss yang kita lawan, itu semua jadi memori yang nggak bakal bisa aku hapus.</p>
+                <p>Terima kasih sudah dengerin curhatan aku, makasih udah mau main bareng sampai larut malam.</p>
+                <p>Meskipun kita dipisahkan jarak, layar HP ini jadi saksi persahabatan kita yang seru banget.</p>
+                <p>Sehat selalu ya di sana, semoga suatu saat kita bisa mabar lagi atau bahkan ketemu beneran!</p>
+                <button class="btn-game" onclick="showPage(1)" style="padding: 8px 15px; font-size: 0.8rem;">Kembali</button>
+            </div>
+        </div>
     </div>
 
     <div class="music-container">
@@ -128,83 +176,44 @@
         <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1">
     </div>
 
-    <audio id="bgMusic" loop preload="auto">
+    <audio id="bgMusic" loop>
         <source src="lagu.mp3" type="audio/mp3">
     </audio>
 
     <script>
+        // Navigasi Halaman
+        function showPage(pageNumber) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page' + pageNumber).classList.add('active');
+        }
+
+        // Logika Musik
         const music = document.getElementById("bgMusic");
         const musicBtn = document.getElementById("musicBtn");
         const volumeSlider = document.getElementById("volumeSlider");
         let isPlaying = false;
 
-        // Fungsi nyalakan/matikan musik
-        function toggleMusic() {
-            if (isPlaying) {
-                music.pause();
-                musicBtn.textContent = "🔇";
-                musicBtn.style.backgroundColor = "#FFD700";
-            } else {
-                music.play().then(() => {
-                    musicBtn.textContent = "🔊";
-                    musicBtn.style.backgroundColor = "#fff";
-                }).catch(e => console.log("Gagal putar: ", e));
-            }
+        musicBtn.addEventListener("click", () => {
+            if (isPlaying) { music.pause(); musicBtn.textContent = "🔇"; }
+            else { music.play(); musicBtn.textContent = "🔊"; }
             isPlaying = !isPlaying;
-        }
-
-        musicBtn.addEventListener("click", toggleMusic);
-
-        // Fungsi kontrol volume
-        volumeSlider.addEventListener("input", (e) => {
-            music.volume = e.target.value;
-            // Update ikon jika volume di-nol-kan
-            if (music.volume == 0) {
-                musicBtn.textContent = "🔇";
-            } else if (isPlaying) {
-                musicBtn.textContent = "🔊";
-            }
         });
 
-        // Efek Salju
+        volumeSlider.addEventListener("input", (e) => { music.volume = e.target.value; });
+
+        // Efek Salju (Singkat)
         const canvas = document.getElementById("snow-canvas");
         const ctx = canvas.getContext("2d");
         let particles = [];
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 3 + 1;
-                this.speed = Math.random() * 1 + 0.5;
-                this.opacity = Math.random() * 0.5 + 0.2;
-            }
-            update() {
-                this.y += this.speed;
-                if (this.y > canvas.height) { this.y = -10; this.x = Math.random() * canvas.width; }
-            }
-            draw() {
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
-            }
+            constructor() { this.x = Math.random()*canvas.width; this.y = Math.random()*canvas.height; this.size = Math.random()*3+1; this.speed = Math.random()*1+0.5; this.opacity = Math.random()*0.5+0.2; }
+            update() { this.y += this.speed; if (this.y > canvas.height) this.y = -10; }
+            draw() { ctx.fillStyle = `rgba(255,255,255,${this.opacity})`; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); }
         }
-
-        function createParticles() { for (let i = 0; i < 70; i++) { particles.push(new Particle()); } }
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animateParticles);
-        }
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            particles = []; createParticles();
-        });
-
-        createParticles();
-        animateParticles();
+        function create() { for(let i=0; i<70; i++) particles.push(new Particle()); }
+        function anim() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p => {p.update(); p.draw();}); requestAnimationFrame(anim); }
+        create(); anim();
     </script>
 </body>
 </html>
