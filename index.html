@@ -6,7 +6,7 @@
     <title>Untuk Sahabat Gamersku</title>
     <style>
         body {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('foto kenangan.png');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url('foto kenangan.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -21,23 +21,20 @@
             overflow: hidden;
         }
 
-        /* Navigasi Halaman */
         .page {
-            display: none; /* Sembunyikan semua halaman dulu */
+            display: none;
             text-align: center;
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
             padding: 20px;
             animation: fadeIn 1.5s ease forwards;
         }
 
-        .active {
-            display: block; /* Hanya tampilkan halaman yang aktif */
-        }
+        .active { display: block; }
 
         /* Halaman 1 */
         .container-h1 {
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
             padding: 40px;
             border: 3px solid #FFD700;
             border-radius: 20px;
@@ -46,73 +43,65 @@
             margin: 0 auto;
         }
 
-        h1 {
-            color: #FFD700;
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Halaman 2 (Layout Baru) */
+        /* Halaman 2 Layout */
         .second-page-content {
             display: flex;
-            flex-direction: row; /* Foto kiri, Teks kanan */
-            align-items: flex-start;
+            flex-direction: row;
             gap: 30px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
             border-radius: 20px;
             border: 2px solid #FFD700;
+            height: 80vh; /* Tentukan tinggi agar konten di dalam bisa diatur */
+            overflow: hidden;
         }
 
-        .photo-side {
+        /* Sisi Kiri: Foto yang berjalan ke atas */
+        .photo-scroller-container {
             flex: 1;
+            height: 100%;
+            overflow: hidden; /* Sembunyikan foto yang keluar jalur */
+            position: relative;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.3);
         }
 
-        .photo-side img {
+        .photo-track {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            animation: scrollUp 20s linear infinite; /* Jalankan animasi */
+        }
+
+        .photo-track img {
             width: 100%;
-            border-radius: 15px;
-            border: 2px solid #FFD700;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            border-radius: 10px;
+            border: 1px solid #FFD700;
         }
 
+        /* Animasi Scroll Ke Atas */
+        @keyframes scrollUp {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); } /* Bergeser setengah dari total tinggi track */
+        }
+
+        /* Sisi Kanan: Teks Tetap Diam */
         .text-side {
             flex: 1;
             text-align: left;
-            max-height: 400px;
-            overflow-y: auto; /* Biar bisa scroll kalau kata-katanya panjang */
-            padding-right: 10px;
+            padding-right: 15px;
+            display: flex;
+            flex-direction: column;
         }
 
-        .text-side h2 {
-            color: #FFD700;
-            margin-top: 0;
+        .text-content {
+            overflow-y: auto;
+            flex-grow: 1;
         }
 
-        .text-side p {
-            line-height: 1.8;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
+        .text-side h2 { color: #FFD700; border-bottom: 1px solid #FFD700; padding-bottom: 10px; }
 
-        /* Tombol */
-        .btn-game {
-            display: inline-block;
-            margin-top: 20px;
-            background-color: #FFD700;
-            color: #111;
-            padding: 12px 24px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-            border: none;
-        }
-
-        .btn-game:hover { transform: scale(1.1); box-shadow: 0 0 20px #FFD700; background-color: #fff; }
-
-        /* Kontrol Musik */
+        /* Musik & Slider */
         .music-container {
             position: fixed;
             bottom: 30px;
@@ -120,7 +109,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             padding: 8px 15px;
             border-radius: 50px;
             border: 2px solid #FFD700;
@@ -130,12 +119,18 @@
         #musicBtn { background: #FFD700; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; }
         #volumeSlider { width: 70px; accent-color: #FFD700; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Mobile Responsive */
-        @media (max-width: 600px) {
-            .second-page-content { flex-direction: column; max-height: 80vh; overflow-y: auto; }
+        .btn-game {
+            background-color: #FFD700;
+            color: #111;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
         }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         #snow-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
     </style>
@@ -146,27 +141,44 @@
 
     <div id="page1" class="page active">
         <div class="container-h1">
-            <h1>Hay Teman Online Ku !!</h1>
-            <p>Dari Dunia <span style="color:#FFD700; font-weight:bold;">Roblox</span> ke Persahabatan Nyata.</p>
-            <p>Makasih ya sudah mau kenalan dengan aku.</p>
+            <h1 style="color:#FFD700">Hay Teman Online Ku !!</h1>
+            <p>Klik tombol di bawah untuk melihat kenangan kita...</p>
             <button class="btn-game" onclick="showPage(2)">Terimakasih Kenangan nya</button>
         </div>
     </div>
 
     <div id="page2" class="page">
         <div class="second-page-content">
-            <div class="photo-side">
-                <img src="foto kenangan.png" alt="Kenangan Kita">
-            </div>
             
+            <div class="photo-scroller-container">
+                <div class="photo-track">
+                    <img src="foto kenangan.png">
+                    <img src="foto kenangan.png">
+                    <img src="foto kenangan.png">
+                    <img src="foto kenangan.png">
+                    <img src="foto kenangan.png">
+                    <img src="foto kenangan.png">
+                    <img src="foto kenangan.png">
+                    <img src="foto kenangan.png">
+                    <img src="foto kenangan.png">
+                    <img src="foto kenangan.png">
+                    <img src="foto kenangan.png">
+                    <img src="foto kenangan.png">
+                    <img src="foto kenangan.png">
+                    <img src="foto kenangan.png">
+                </div>
+            </div>
+
             <div class="text-side">
-                <h2>Our Story</h2>
-                <p>Mungkin awalnya kita cuma karakter kotak-kotak di Roblox, tapi obrolan kita beneran nyata.</p>
-                <p>Setiap base yang kita bangun, setiap boss yang kita lawan, itu semua jadi memori yang nggak bakal bisa aku hapus.</p>
-                <p>Terima kasih sudah dengerin curhatan aku, makasih udah mau main bareng sampai larut malam.</p>
-                <p>Meskipun kita dipisahkan jarak, layar HP ini jadi saksi persahabatan kita yang seru banget.</p>
-                <p>Sehat selalu ya di sana, semoga suatu saat kita bisa mabar lagi atau bahkan ketemu beneran!</p>
-                <button class="btn-game" onclick="showPage(1)" style="padding: 8px 15px; font-size: 0.8rem;">Kembali</button>
+                <h2>Memories</h2>
+                <div class="text-content">
+                    <p>Mungkin awalnya kita cuma karakter kotak-kotak di Roblox, tapi obrolan kita beneran nyata.</p>
+                    <p>Setiap base yang kita bangun, setiap boss yang kita lawan, itu semua jadi memori yang nggak bakal bisa aku hapus.</p>
+                    <p>Terima kasih sudah dengerin curhatan aku, makasih udah mau main bareng sampai larut malam.</p>
+                    <p>Meskipun kita dipisahkan jarak, layar HP ini jadi saksi persahabatan kita yang seru banget.</p>
+                    <p>Sehat selalu ya di sana, semoga suatu saat kita bisa mabar lagi atau bahkan ketemu beneran!</p>
+                </div>
+                <button class="btn-game" onclick="showPage(1)" style="width: fit-content;">Kembali</button>
             </div>
         </div>
     </div>
@@ -176,18 +188,14 @@
         <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1">
     </div>
 
-    <audio id="bgMusic" loop>
-        <source src="lagu.mp3" type="audio/mp3">
-    </audio>
+    <audio id="bgMusic" loop><source src="lagu.mp3" type="audio/mp3"></audio>
 
     <script>
-        // Navigasi Halaman
-        function showPage(pageNumber) {
+        function showPage(num) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page' + pageNumber).classList.add('active');
+            document.getElementById('page' + num).classList.add('active');
         }
 
-        // Logika Musik
         const music = document.getElementById("bgMusic");
         const musicBtn = document.getElementById("musicBtn");
         const volumeSlider = document.getElementById("volumeSlider");
@@ -198,10 +206,8 @@
             else { music.play(); musicBtn.textContent = "🔊"; }
             isPlaying = !isPlaying;
         });
-
         volumeSlider.addEventListener("input", (e) => { music.volume = e.target.value; });
 
-        // Efek Salju (Singkat)
         const canvas = document.getElementById("snow-canvas");
         const ctx = canvas.getContext("2d");
         let particles = [];
