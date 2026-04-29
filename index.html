@@ -6,7 +6,7 @@
     <title>Untuk Sahabat Gamersku</title>
     <style>
         body {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url('foto kenangan.png');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('foto kenangan.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -32,14 +32,14 @@
 
         .active { display: block; }
 
-        /* Halaman 1 */
-        .container-h1 {
-            background: rgba(0, 0, 0, 0.7);
+        /* Halaman 1 & 3 Container */
+        .container-box {
+            background: rgba(0, 0, 0, 0.8);
             padding: 40px;
             border: 3px solid #FFD700;
             border-radius: 20px;
             box-shadow: 0 0 30px rgba(215, 175, 0, 0.3);
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
         }
 
@@ -48,53 +48,43 @@
             display: flex;
             flex-direction: row;
             gap: 30px;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 25px;
             border-radius: 20px;
             border: 2px solid #FFD700;
             height: 80vh; 
             overflow: hidden;
         }
 
-        /* Sisi Kiri: Foto yang berjalan ke atas */
         .photo-scroller-container {
             flex: 1;
             height: 100%;
             overflow: hidden;
             position: relative;
             border-radius: 10px;
-            background: rgba(0,0,0,0.3);
         }
 
         .photo-track {
             display: flex;
             flex-direction: column;
-            gap: 15px; /* Jarak antar foto */
-            /* Durasi 40 detik supaya lebih lambat dan emosional */
-            animation: scrollSmoothUp 40s linear infinite; 
+            gap: 15px;
+            animation: scrollSmoothUp 45s linear infinite; 
         }
 
         .photo-track img {
             width: 100%;
             border-radius: 10px;
             border: 2px solid #FFD700;
-            display: block;
         }
 
-        /* Perbaikan Animasi Agar Smooth */
         @keyframes scrollSmoothUp {
             0% { transform: translateY(0); }
-            100% { 
-                /* -50% menarik grup pertama, -7.5px menarik setengah dari gap (15px) */
-                transform: translateY(calc(-50% - 7.5px)); 
-            }
+            100% { transform: translateY(calc(-50% - 7.5px)); }
         }
 
-        /* Sisi Kanan: Teks */
         .text-side {
             flex: 1;
             text-align: left;
-            padding-right: 15px;
             display: flex;
             flex-direction: column;
         }
@@ -105,54 +95,37 @@
             padding-right: 10px;
         }
 
-        /* Scrollbar styling */
         .text-content::-webkit-scrollbar { width: 5px; }
         .text-content::-webkit-scrollbar-thumb { background: #FFD700; border-radius: 10px; }
 
-        .text-side h2 { color: #FFD700; border-bottom: 1px solid #FFD700; padding-bottom: 10px; margin-top: 0; }
-        .text-content p { line-height: 1.8; margin-bottom: 15px; font-size: 1.05rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
-
-        /* Musik & Slider */
-        .music-container {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 8px 15px;
-            border-radius: 50px;
-            border: 2px solid #FFD700;
-            z-index: 100;
+        .final-photo {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 15px;
+            border: 3px solid #FFD700;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
         }
-
-        #musicBtn { background: #FFD700; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 20px; }
-        #volumeSlider { width: 70px; accent-color: #FFD700; }
 
         .btn-game {
             background-color: #FFD700;
             color: #111;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 15px;
             transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .btn-game:hover { transform: scale(1.05); background-color: #fff; }
+        .btn-game:hover { transform: scale(1.05); background-color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.4); }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         #snow-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-
-        /* Penyesuaian Mobile */
-        @media (max-width: 600px) {
-            .second-page-content { flex-direction: column; height: 90vh; }
-            .photo-scroller-container { height: 35%; }
-        }
     </style>
 </head>
 <body>
@@ -160,49 +133,44 @@
     <canvas id="snow-canvas"></canvas>
 
     <div id="page1" class="page active">
-        <div class="container-h1">
+        <div class="container-box">
             <h1 style="color:#FFD700">Hay Teman Online Ku !!</h1>
-            <p>Klik tombol di bawah untuk melihat kenangan kita...</p>
-            <button class="btn-game" onclick="showPage(2)">Terimakasih Kenangan nya</button>
+            <p>Ada sesuatu yang ingin aku sampaikan...</p>
+            <button class="btn-game" onclick="showPage(2)">Buka Kenangan</button>
         </div>
     </div>
 
     <div id="page2" class="page">
         <div class="second-page-content">
-            
             <div class="photo-scroller-container">
                 <div class="photo-track">
-                    <img src="foto11.png">
-                    <img src="foto22.png">
-                    <img src="foto33.png">
-                    <img src="foto44.png">
-                    <img src="foto55.png">
-                    <img src="foto66.png">
-                    <img src="foto77.png">
-
-                    <img src="foto11.png">
-                    <img src="foto22.png">
-                    <img src="foto33.png">
-                    <img src="foto44.png">
-                    <img src="foto55.png">
-                    <img src="foto66.png">
-                    <img src="foto77.png">
+                    <img src="foto11.png"><img src="foto22.png"><img src="foto33.png">
+                    <img src="foto44.png"><img src="foto55.png"><img src="foto66.png"><img src="foto77.png">
+                    <img src="foto11.png"><img src="foto22.png"><img src="foto33.png">
+                    <img src="foto44.png"><img src="foto55.png"><img src="foto66.png"><img src="foto77.png">
                 </div>
             </div>
-
             <div class="text-side">
-                <h2>Pesan Kenangan untuk Sahabat Roblox-ku</h2>
+                <h2>Our Story</h2>
                 <div class="text-content">
-                    <p>"Mungkin bagi orang lain, ini cuma soal game. Tapi bagi aku, ini soal kamu, soal kita, dan semua waktu yang kita habiskan bareng di dunia virtual itu.</p>
-                    <p>Dulu, kita cuma dua orang asing yang kebetulan bertemu dan bermain dengan teman yang ku kenal dengan sebutan gaga. Awalnya cuma mabar biasa, atau sekadar lari-lari nggak jelas di map. Tapi siapa sangka, dari karakter kotak-kotak dan obrolan di kolom chat itu, tumbuh sebuah pertemanan yang jauh lebih nyata dari apa pun.</p>
-                    <p>Ingat nggak? Berapa kali kita kalah bareng, berapa kali kita ketawa sampai perut sakit cuma gara-gara glitch konyol, atau map horor yang belum kita tamati yaitu the mimic. Di saat dunia nyata mungkin lagi capek-capeknya, login ke Roblox dan melihat nama kalian 'Online' itu selalu jadi pelarian terbaik buat aku.</p>
-                    <p>Makasih ya, sudah mau jadi pendengar yang baik di saat aku butuh tempat cerita. Makasih sudah nggak pernah menghakimi, meskipun kita belum pernah bertatap muka secara langsung (kecuali bella). Kalian membuktikan kalau pertemanan itu nggak butuh jarak yang dekat, tapi butuh hati yang saling terkoneksi.</p>
-                    <p>Aku nggak tahu sampai kapan kita bakal terus mabar. Mungkin suatu saat kesibukan bakal narik kita ke arah yang berbeda. Tapi satu hal yang harus kalian tahu: setiap momen di game itu, setiap kalimat yang kalian kirim, dan setiap tawa yang kita bagi, sudah aku simpan rapi di memori paling spesial.</p>
-                    <p>Kalian bukan cuma 'teman online' buat aku. Kalian adalah bagian dari perjalanan hidupku. Sehat selalu di sana, ya. Teruslah kejar mimpimu di dunia nyata sekeren kalian mengejar target di game. Jangan pernah lupa, di suatu tempat di dunia ini, ada aku yang selalu bangga bisa kenal sama kalian.</p>
-                    <p>Terima kasih untuk semuanya. Terimakasih untuk kenangannya. Sampai bertemu lagi di hari selanjutnya, atau mungkin, di suatu hari nanti di dunia nyata."</p>
+                    <p>"Dulu kita cuma asing yang dipertemukan oleh server. Dari sekadar lari-lari nggak jelas sampai jadi tim paling kompak kalau lagi mabar. Makasih udah jadi pelarian terbaik saat dunia nyata lagi capek-capeknya."</p>
+                    <p>Momen-momen konyol di the mimic, ketawa bareng gara-gara glitch, semua itu berharga banget buat aku.</p>
                 </div>
-                <button class="btn-game" onclick="showPage(1)" style="width: fit-content;">Kembali</button>
+                <button class="btn-game" onclick="showPage(3)">Pesan Terakhir</button>
             </div>
+        </div>
+    </div>
+
+    <div id="page3" class="page">
+        <div class="container-box">
+            <img src="foto11.png" class="final-photo" alt="Kenangan Terakhir">
+            <h2 style="color:#FFD700">Satu Hal Terakhir...</h2>
+            <div style="text-align: justify; line-height: 1.8; color: #e0e0e0; font-style: italic;">
+                <p>"Jujur, kadang aku takut. Takut kalau suatu saat nanti notifikasi 'Online' di samping nama kalian nggak akan pernah muncul lagi. Takut kalau kesibukan dunia nyata pelan-pelan bakal bikin kita lupa kalau kita pernah sedekat ini di dunia virtual.</p>
+                <p>Mungkin suatu hari nanti, kita bakal sibuk dengan hidup masing-masing, kerja, atau mengejar mimpi yang berbeda. Akun kita mungkin bakal berdebu, dan map yang biasa kita mainin cuma jadi sejarah. Tapi yang harus kalian tahu, kalian bukan sekadar karakter kotak-kotak di layar HP-ku. Kalian adalah alasan kenapa aku betah berjam-jam menatap layar cuma buat ketawa bareng.</p>
+                <p>Terima kasih sudah hadir di masa remajaku. Terima kasih sudah menjadi bagian dari cerita yang mungkin nggak akan pernah aku ceritakan ke anak cucuku, tapi akan selalu aku kenang sendirian sambil tersenyum. Sehat selalu ya kalian... meski nanti kita nggak mabar lagi, doa aku tetap sama: semoga kalian bahagia dengan jalan yang kalian pilih."</p>
+            </div>
+            <p style="margin-top: 25px; font-weight: bold; color: #FFD700;">— Sampai jumpa di server kehidupan yang lebih baik.</p>
         </div>
     </div>
 
@@ -210,7 +178,6 @@
         <button id="musicBtn">🔇</button>
         <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1">
     </div>
-
     <audio id="bgMusic" loop><source src="lagu.mp3" type="audio/mp3"></audio>
 
     <script>
@@ -236,11 +203,17 @@
         let particles = [];
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         class Particle {
-            constructor() { this.x = Math.random()*canvas.width; this.y = Math.random()*canvas.height; this.size = Math.random()*2+1; this.speed = Math.random()*0.8+0.2; this.opacity = Math.random()*0.4+0.2; }
+            constructor() { 
+                this.x = Math.random()*canvas.width; 
+                this.y = Math.random()*canvas.height; 
+                this.size = Math.random()*2+1; 
+                this.speed = Math.random()*0.5+0.2; 
+                this.opacity = Math.random()*0.5; 
+            }
             update() { this.y += this.speed; if (this.y > canvas.height) this.y = -10; }
             draw() { ctx.fillStyle = `rgba(255,255,255,${this.opacity})`; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); }
         }
-        function create() { for(let i=0; i<80; i++) particles.push(new Particle()); }
+        function create() { for(let i=0; i<100; i++) particles.push(new Particle()); }
         function anim() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p => {p.update(); p.draw();}); requestAnimationFrame(anim); }
         create(); anim();
     </script>
