@@ -69,19 +69,25 @@
         .photo-track {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            animation: scrollUp 25s linear infinite; /* Sedikit diperlambat agar lebih estetik */
+            gap: 15px; /* Jarak antar foto */
+            /* Durasi 40 detik supaya lebih lambat dan emosional */
+            animation: scrollSmoothUp 40s linear infinite; 
         }
 
         .photo-track img {
             width: 100%;
             border-radius: 10px;
-            border: 1px solid #FFD700;
+            border: 2px solid #FFD700;
+            display: block;
         }
 
-        @keyframes scrollUp {
+        /* Perbaikan Animasi Agar Smooth */
+        @keyframes scrollSmoothUp {
             0% { transform: translateY(0); }
-            100% { transform: translateY(-50%); } 
+            100% { 
+                /* -50% menarik grup pertama, -7.5px menarik setengah dari gap (15px) */
+                transform: translateY(calc(-50% - 7.5px)); 
+            }
         }
 
         /* Sisi Kanan: Teks */
@@ -104,7 +110,7 @@
         .text-content::-webkit-scrollbar-thumb { background: #FFD700; border-radius: 10px; }
 
         .text-side h2 { color: #FFD700; border-bottom: 1px solid #FFD700; padding-bottom: 10px; margin-top: 0; }
-        .text-content p { line-height: 1.6; margin-bottom: 15px; font-size: 1.05rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        .text-content p { line-height: 1.8; margin-bottom: 15px; font-size: 1.05rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
 
         /* Musik & Slider */
         .music-container {
@@ -145,7 +151,7 @@
         /* Penyesuaian Mobile */
         @media (max-width: 600px) {
             .second-page-content { flex-direction: column; height: 90vh; }
-            .photo-scroller-container { height: 30%; }
+            .photo-scroller-container { height: 35%; }
         }
     </style>
 </head>
@@ -166,13 +172,21 @@
             
             <div class="photo-scroller-container">
                 <div class="photo-track">
-                    <img src="foto11.png"><img src="foto11.png">
-                    <img src="foto22.png"><img src="foto22.png">
-                    <img src="foto33.png"><img src="foto33.png">
-                    <img src="foto44.png"><img src="foto44.png">
-                    <img src="foto55.png"><img src="foto55.png">
-                    <img src="foto66.png"><img src="foto66.png">
-                    <img src="foto77.png"><img src="foto77.png">
+                    <img src="foto11.png">
+                    <img src="foto22.png">
+                    <img src="foto33.png">
+                    <img src="foto44.png">
+                    <img src="foto55.png">
+                    <img src="foto66.png">
+                    <img src="foto77.png">
+
+                    <img src="foto11.png">
+                    <img src="foto22.png">
+                    <img src="foto33.png">
+                    <img src="foto44.png">
+                    <img src="foto55.png">
+                    <img src="foto66.png">
+                    <img src="foto77.png">
                 </div>
             </div>
 
@@ -222,11 +236,11 @@
         let particles = [];
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         class Particle {
-            constructor() { this.x = Math.random()*canvas.width; this.y = Math.random()*canvas.height; this.size = Math.random()*3+1; this.speed = Math.random()*1+0.5; this.opacity = Math.random()*0.5+0.2; }
+            constructor() { this.x = Math.random()*canvas.width; this.y = Math.random()*canvas.height; this.size = Math.random()*2+1; this.speed = Math.random()*0.8+0.2; this.opacity = Math.random()*0.4+0.2; }
             update() { this.y += this.speed; if (this.y > canvas.height) this.y = -10; }
             draw() { ctx.fillStyle = `rgba(255,255,255,${this.opacity})`; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); }
         }
-        function create() { for(let i=0; i<70; i++) particles.push(new Particle()); }
+        function create() { for(let i=0; i<80; i++) particles.push(new Particle()); }
         function anim() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p => {p.update(); p.draw();}); requestAnimationFrame(anim); }
         create(); anim();
     </script>
