@@ -56,7 +56,6 @@
             overflow: hidden;
         }
 
-        /* Sisi Kiri: Foto yang berjalan ke atas */
         .photo-scroller-container {
             flex: 1;
             height: 100%;
@@ -82,12 +81,9 @@
 
         @keyframes scrollSmoothUp {
             0% { transform: translateY(0); }
-            100% { 
-                transform: translateY(calc(-50% - 7.5px)); 
-            }
+            100% { transform: translateY(calc(-50% - 7.5px)); }
         }
 
-        /* Sisi Kanan: Teks */
         .text-side {
             flex: 1;
             text-align: left;
@@ -108,16 +104,22 @@
         .text-side h2 { color: #FFD700; border-bottom: 1px solid #FFD700; padding-bottom: 10px; margin-top: 0; }
         .text-content p { line-height: 1.8; margin-bottom: 15px; font-size: 1.05rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
 
-        /* Halaman 3 - Tema Sedih */
+        /* PERBAIKAN HALAMAN 3 - Agar bisa di-scroll di PC */
         .container-h3 {
             background: rgba(0, 0, 0, 0.85);
             padding: 30px;
             border: 2px solid #FFD700;
             border-radius: 20px;
             max-width: 600px;
+            max-height: 85vh; /* Batasi tinggi agar tidak melebihi layar PC */
             margin: 0 auto;
+            overflow-y: auto; /* Aktifkan scroll internal */
             animation: fadeIn 2s ease;
         }
+
+        /* Scrollbar styling untuk Halaman 3 */
+        .container-h3::-webkit-scrollbar { width: 5px; }
+        .container-h3::-webkit-scrollbar-thumb { background: #FFD700; border-radius: 10px; }
 
         .img-penutup {
             width: 100%;
@@ -134,6 +136,7 @@
             font-style: italic;
             color: #ddd;
             font-size: 1rem;
+            padding: 0 10px;
         }
 
         /* Musik & Slider */
@@ -175,6 +178,7 @@
         @media (max-width: 600px) {
             .second-page-content { flex-direction: column; height: 90vh; }
             .photo-scroller-container { height: 35%; }
+            .container-h3 { width: 90%; max-height: 80vh; }
         }
     </style>
 </head>
@@ -192,7 +196,6 @@
 
     <div id="page2" class="page">
         <div class="second-page-content">
-            
             <div class="photo-scroller-container">
                 <div class="photo-track">
                     <img src="foto11.png"><img src="foto22.png"><img src="foto33.png">
@@ -201,7 +204,6 @@
                     <img src="foto44.png"><img src="foto55.png"><img src="foto66.png"><img src="foto77.png">
                 </div>
             </div>
-
             <div class="text-side">
                 <h2>Pesan Kenangan untuk Sahabat Roblox-ku</h2>
                 <div class="text-content">
@@ -227,8 +229,10 @@
                 <p>Mungkin suatu hari nanti akun kita bakal berdebu, dan map yang biasa kita mainin bareng cuma tinggal kenangan yang tersisa di history. Tapi satu hal yang harus kalian ingat: kalian bukan sekadar karakter virtual di layar HP-ku. Kalian adalah sahabat nyata yang pernah menyelamatkan hari-hariku yang sepi dengan tawa kalian.</p>
                 <p>Terima kasih sudah hadir di masa remajaku. Terima kasih sudah mengisi waktu-waktuku dengan kenangan yang luar biasa. Walaupun mungkin kita nggak akan mabar selamanya, doa aku bakal selalu sama: semoga kalian bahagia di dunia nyata kalian yang hebat itu.</p>
                 <p>Jangan pernah lupakan kalau kita pernah sedekat ini, ya? Sehat selalu, kawan. Sampai bertemu lagi di server kehidupan yang lebih indah, suatu hari nanti."</p>
+                
+                <p style="margin-top: 30px; font-weight: bold; color: #FFD700; text-align: center;">— Terimakasih untuk segalanya.</p>
+                <p style="font-size: 0.8rem; opacity: 0.5; text-align: center;">(Scroll ke bawah jika teks terpotong)</p>
             </div>
-            <p style="margin-top: 20px; font-weight: bold; color: #FFD700;">— Terimakasih untuk segalanya.</p>
         </div>
     </div>
 
