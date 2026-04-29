@@ -32,18 +32,18 @@
 
         .active { display: block; }
 
-        /* Style Box Halaman 1 & 3 */
-        .container-h1, .container-final {
-            background: rgba(0, 0, 0, 0.75);
+        /* Halaman 1 */
+        .container-h1 {
+            background: rgba(0, 0, 0, 0.7);
             padding: 40px;
             border: 3px solid #FFD700;
             border-radius: 20px;
             box-shadow: 0 0 30px rgba(215, 175, 0, 0.3);
-            max-width: 550px;
+            max-width: 500px;
             margin: 0 auto;
         }
 
-        /* Halaman 2 Layout (Tetap Sama) */
+        /* Halaman 2 Layout */
         .second-page-content {
             display: flex;
             flex-direction: row;
@@ -56,6 +56,7 @@
             overflow: hidden;
         }
 
+        /* Sisi Kiri: Foto yang berjalan ke atas */
         .photo-scroller-container {
             flex: 1;
             height: 100%;
@@ -68,8 +69,9 @@
         .photo-track {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            animation: scrollSmoothUp 40s linear infinite;
+            gap: 15px; /* Jarak antar foto */
+            /* Durasi 40 detik supaya lebih lambat dan emosional */
+            animation: scrollSmoothUp 40s linear infinite; 
         }
 
         .photo-track img {
@@ -79,11 +81,16 @@
             display: block;
         }
 
+        /* Perbaikan Animasi Agar Smooth */
         @keyframes scrollSmoothUp {
             0% { transform: translateY(0); }
-            100% { transform: translateY(calc(-50% - 7.5px)); }
+            100% { 
+                /* -50% menarik grup pertama, -7.5px menarik setengah dari gap (15px) */
+                transform: translateY(calc(-50% - 7.5px)); 
+            }
         }
 
+        /* Sisi Kanan: Teks */
         .text-side {
             flex: 1;
             text-align: left;
@@ -98,21 +105,14 @@
             padding-right: 10px;
         }
 
+        /* Scrollbar styling */
         .text-content::-webkit-scrollbar { width: 5px; }
         .text-content::-webkit-scrollbar-thumb { background: #FFD700; border-radius: 10px; }
 
         .text-side h2 { color: #FFD700; border-bottom: 1px solid #FFD700; padding-bottom: 10px; margin-top: 0; }
         .text-content p { line-height: 1.8; margin-bottom: 15px; font-size: 1.05rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
 
-        /* Halaman 3 Photo */
-        .img-final {
-            width: 100%;
-            max-width: 250px;
-            border-radius: 15px;
-            border: 3px solid #FFD700;
-            margin-bottom: 20px;
-        }
-
+        /* Musik & Slider */
         .music-container {
             position: fixed;
             bottom: 30px;
@@ -145,8 +145,10 @@
         .btn-game:hover { transform: scale(1.05); background-color: #fff; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
         #snow-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 
+        /* Penyesuaian Mobile */
         @media (max-width: 600px) {
             .second-page-content { flex-direction: column; height: 90vh; }
             .photo-scroller-container { height: 35%; }
@@ -167,14 +169,27 @@
 
     <div id="page2" class="page">
         <div class="second-page-content">
+            
             <div class="photo-scroller-container">
                 <div class="photo-track">
-                    <img src="foto11.png"><img src="foto22.png"><img src="foto33.png">
-                    <img src="foto44.png"><img src="foto55.png"><img src="foto66.png"><img src="foto77.png">
-                    <img src="foto11.png"><img src="foto22.png"><img src="foto33.png">
-                    <img src="foto44.png"><img src="foto55.png"><img src="foto66.png"><img src="foto77.png">
+                    <img src="foto11.png">
+                    <img src="foto22.png">
+                    <img src="foto33.png">
+                    <img src="foto44.png">
+                    <img src="foto55.png">
+                    <img src="foto66.png">
+                    <img src="foto77.png">
+
+                    <img src="foto11.png">
+                    <img src="foto22.png">
+                    <img src="foto33.png">
+                    <img src="foto44.png">
+                    <img src="foto55.png">
+                    <img src="foto66.png">
+                    <img src="foto77.png">
                 </div>
             </div>
+
             <div class="text-side">
                 <h2>Pesan Kenangan untuk Sahabat Roblox-ku</h2>
                 <div class="text-content">
@@ -186,22 +201,8 @@
                     <p>Kalian bukan cuma 'teman online' buat aku. Kalian adalah bagian dari perjalanan hidupku. Sehat selalu di sana, ya. Teruslah kejar mimpimu di dunia nyata sekeren kalian mengejar target di game. Jangan pernah lupa, di suatu tempat di dunia ini, ada aku yang selalu bangga bisa kenal sama kalian.</p>
                     <p>Terima kasih untuk semuanya. Terimakasih untuk kenangannya. Sampai bertemu lagi di hari selanjutnya, atau mungkin, di suatu hari nanti di dunia nyata."</p>
                 </div>
-                <button class="btn-game" onclick="showPage(3)" style="width: fit-content;">Pesan Terakhir</button>
+                <button class="btn-game" onclick="showPage(1)" style="width: fit-content;">Kembali</button>
             </div>
-        </div>
-    </div>
-
-    <div id="page3" class="page">
-        <div class="container-final">
-            <img src="foto11.png" class="img-final">
-            <h2 style="color:#FFD700; margin-top:0;">Satu Hal Terakhir...</h2>
-            <div style="text-align: justify; line-height: 1.8; color: #f0f0f0; font-style: italic; font-size: 1.1rem;">
-                <p>"Jujur, kadang aku sering kepikiran. Bakal sampai kapan ya kita kayak begini? Takut banget kalau suatu saat nanti pas aku login, nama kalian nggak pernah 'Online' lagi di friendlist aku. Takut kalau kesibukan masing-masing pelan-pelan bikin obrolan kita di Discord atau di chat game jadi sepi, lalu hilang begitu aja.</p>
-                <p>Mungkin suatu hari nanti akun kita bakal berdebu, dan map yang biasa kita mainin bareng cuma tinggal kenangan. Tapi satu hal yang harus kalian ingat: kalian bukan sekadar karakter virtual buat aku. Kalian adalah sahabat nyata yang pernah bikin hari-hariku yang capek jadi penuh tawa.</p>
-                <p>Terima kasih sudah mau jadi bagian dari masa mudaku. Terima kasih sudah mengisi waktu-waktuku dengan kenangan yang luar biasa. Walaupun mungkin kita nggak akan mabar selamanya, doa aku bakal selalu sama: semoga kalian sukses dan bahagia di dunia nyata kalian yang hebat itu.</p>
-                <p>Jangan pernah lupakan kalau kita pernah sedekat ini, ya? Sehat selalu, kawan. Sampai bertemu lagi di server kehidupan yang lebih indah."</p>
-            </div>
-            <p style="margin-top: 30px; font-weight: bold; color: #FFD700; font-size: 1.2rem;">— Sayonara, Gamers.</p>
         </div>
     </div>
 
